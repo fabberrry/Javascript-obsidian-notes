@@ -1,1 +1,1 @@
-# js_
+# Javascript-obsidian-notes
