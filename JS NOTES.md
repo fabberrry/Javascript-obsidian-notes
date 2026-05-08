@@ -1898,12 +1898,91 @@ Suppose we get data from a web service about a certain game (below). In this cha
 TEST DATA FOR 6: Use players 'Davies', 'Muller', 'Lewandowski' and 'Kimmich'. Then, call the function again with players from game.scored
 
 GOOD LUCK 😀
-
-
-1. Sol
+dATA :
 ```js
-
+	const game = {
+	  team1: 'Bayern Munich',
+	  team2: 'Borrussia Dortmund',
+	  players: [
+	    [
+	      'Neuer',
+	      'Pavard',
+	      'Martinez',
+	      'Alaba',
+	      'Davies',
+	      'Kimmich',
+	      'Goretzka',
+	      'Coman',
+	      'Muller',
+	      'Gnarby',
+	      'Lewandowski',
+	    ],
+	    [
+	      'Burki',
+	      'Schulz',
+	      'Hummels',
+	      'Akanji',
+	      'Hakimi',
+	      'Weigl',
+	      'Witsel',
+	      'Hazard',
+	      'Brandt',
+	      'Sancho',
+	      'Gotze',
+	    ],
+	  ],
+	  score: '4:0',
+	  scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+	  date: 'Nov 9th, 2037',
+	  odds: {
+	    team1: 1.33,
+	    x: 3.25,
+	    team2: 6.5,
+	  },
+	};
 ```
+
+1. Create player 1 and player2 arrays 
+```js
+// sol 1
+let player1 = [];
+let player2 = [];
+[player1, player2] = [game.players[0], game.players[1]];
+console.log(player1, player2);
+
+// ANS
+const [p1,p2]=game.players;
+```
+2. First player of team will be the Goalkeeper and rest be other members
+```js
+// sol2
+let gk, others;
+let gk2, others2;
+[gk, ...others] = [player1];
+[gk2, ...others2] = [player2];
+
+// ANS
+const [gk, ...fieldPlayers]=player1;
+```
+
+3. make a array that has all the players from both team 
+```js
+// sol 3
+let allPlayers;
+[...allPlayers] = [...player1, ...player2];
+console.log(allPlayers);
+
+// ANS
+const allplayers=[...player1,...player2];
+```
+4. make a new player1 array that has all old elm + some 3 extra elm 
+```js
+//sol
+let players1Final = [...player1, 'Thiago', 'Coutinho', 'Perisic'];
+// ANS
+cosnt pf=[...p1,"","",""];
+```
+
 
 
 
@@ -1979,3 +2058,43 @@ so ES6 Enhanced obj literals We dont need to write this
 just do 
 `oreing`
 take this opeinging hrs obj, and put into the restraunt obj and create a property name with exactly that variable name 
+
+2.  Allow to write shorthand methods 
+```js
+UNLIKE THIS--> order: function(){...}
+
+DO THIS-> order(){...}
+```
+
+3. compute the property rather than typing them manually 
+```js
+const weekdays=['','','',''];
+
+rather doing -> thu : ...
+
+do ->[weekdays[4]]: ... property become thu
+or ->[`day-${2+2}`]:...  property beome day-6
+```
+`means u can compute propert name as u want`
+
+---
+Optional chaining
+when accessing a property  of a obj that doesnt exist 
+Suppose we dont know is this prop exist or not, eg if the data came from a real web service ,API , there could be multiple restaurants and not all of the open on mon , so there may not be a property mon in obj
+```js
+log(res.openHrs.mon) --> undefined
+```
+still no problem 
+but if go even furture in chaining 
+when try to check timing on monday , WE GET ERROR
+```js
+log(res.openHrs.mon.open) -->TypeError: Cannot read properties of undefined (reading 'open')
+```
+fix?
+```js
+if(res.openHrs.mon){
+	console.log(restaurant.openingHours.mon.open); 
+}
+```
+`BUT`
+ 
